@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Santiago/.gradle/caches/transforms-3/a1605265a276ccaf05dba118648041ac/transformed/core-1.5.0/res/layout/custom_dialog.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/btn_bg.xml" value="0.2285" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/ic_menu_24.xml" value="0.1735" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/ic_menu_camera.xml" value="0.1635" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/ic_menu_home.xml" value="0.115" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/ic_menu_register.xml" value="0.164" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/ic_menu_report.xml" value="0.164" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/drawable/side_nav_bar.xml" value="0.1635" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout-sw600dp/fragment_register.xml" value="0.18333333333333332" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/activity_menu_slide.xml" value="0.37604166666666666" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/activity_pdf_viewer.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/app_bar_menu_slide.xml" value="0.33" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/content_menu_slide.xml" value="0.2712962962962963" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/custom_loading_dialog.xml" value="0.5" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/custon_dialog.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/fragment_gallery.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/fragment_home2.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/fragment_register.xml" value="0.2807153965785381" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/fragment_report.xml" value="0.25" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/fragment_slideshow.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/nav_header_menu_slide.xml" value="0.33" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/out_of_service_dialog.xml" value="0.33" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/layout/station_autocomplete_row.xml" value="0.18" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/menu/activity_main_drawer.xml" value="0.36102564102564105" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/menu/activity_menu_slide_drawer.xml" value="0.5" />
+        <entry key="..\:/Users/Santiago/Documents/Proyectos/registraduriaappmobile/app/src/main/res/menu/menu_slide.xml" value="0.2712962962962963" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="soft.synergy.registraduriaapp.fragments.RegisterFragment"
+        android:label="Realice el registro"
+        tools:layout="@layout/fragment_register" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="soft.synergy.registraduriaapp.fragments.HomeFragment"
+        android:label="Bienvenido"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="soft.synergy.registraduriaapp.fragments.ReportFragment"
+        android:label="Genere el reporte"
+        tools:layout="@layout/fragment_report" />
+</navigation>
