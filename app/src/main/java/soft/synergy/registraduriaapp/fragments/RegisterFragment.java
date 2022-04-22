@@ -19,10 +19,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -114,45 +117,56 @@ public class RegisterFragment extends Fragment {
 
     private void submit() {
         if (stationCodeSelected != null && !stationCodeSelected.equals("0")) {
-            if (standCodeSelected != null && !standCodeSelected.equals("0")) {
-                loadingDialog.startLoadingAnimation();
-                totalPolls = Long.valueOf(totalPollsET.getText().toString());
-                RegisterRequestModel log = new RegisterRequestModel();
-                log.setPollingStationCode(stationCodeSelected);
-                log.setStandCode(standCodeSelected);
-                log.setTotalPolls(totalPolls);
+            if (standCodeSelected != null && !standCodeSelected.equals("Seleccione la mesa")) {
+                if (totalPollsET.getText().toString() != null && !totalPollsET.getText().toString().equals("")) {
+                    totalPolls = Long.valueOf(totalPollsET.getText().toString());
+                    if (totalPolls > 0) {
+                        loadingDialog.startLoadingAnimation();
+                        RegisterRequestModel log = new RegisterRequestModel();
+                        log.setPollingStationCode(stationCodeSelected);
+                        log.setStandCode(standCodeSelected);
+                        log.setTotalPolls(totalPolls);
 
 
-                Call<RegisterResponseModel> callSubmit = ReportServiceAdapter.getReportService().createLog(log);
-                callSubmit.enqueue(new Callback<RegisterResponseModel>() {
-                    @Override
-                    public void onResponse(Call<RegisterResponseModel> call, Response<RegisterResponseModel> response) {
-                        if (response.isSuccessful()) {
+                        Call<ResponseBody> callSubmit = ReportServiceAdapter.getReportService().createLog(log);
+                        callSubmit.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                if (response.isSuccessful()) {
 
-                            stationsSpinner.setSelection(0);
-                            standsSpinner.setSelection(0);
-                            totalPollsET.setText("");
+                                    stationsSpinner.setSelection(0);
+                                    standsSpinner.setSelection(0);
+                                    totalPollsET.setText("");
 
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    loadingDialog.dismissDialog();
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            loadingDialog.dismissDialog();
+                                        }
+                                    }, 3000);
+
+
                                 }
-                            }, 3000);
+                            }
 
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                loadingDialog.dismissDialog();
+                            }
+                        });
 
-                        }
+                    }else {
+                        Toast.makeText(getContext(), "La cantidad de votos debe ser mayor a 0", Toast.LENGTH_SHORT).show();
                     }
-
-                    @Override
-                    public void onFailure(Call<RegisterResponseModel> call, Throwable t) {
-                        loadingDialog.dismissDialog();
-
-                    }
-                });
-
+                } else {
+                    Toast.makeText(getContext(), "No puede dejar los votos vacios", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(getContext(), "Seleccione una mesa de votación correcta", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            Toast.makeText(getContext(), "Seleccione un lugar de votación correcto", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -234,8 +248,11 @@ public class RegisterFragment extends Fragment {
                             return view;
                         }
                     };
+                    ArrayAdapter<StandModel> firstAdapter = new ArrayAdapter<StandModel>(getContext(), android.R.layout.simple_spinner_item, Arrays.asList(new StandModel("Seleccione uno")));
                     spinStationAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    firstAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     stationsSpinner.setAdapter(spinStationAdapter);
+                    standsSpinner.setAdapter(firstAdapter);
                 }
             }
 

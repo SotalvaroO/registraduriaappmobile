@@ -16,7 +16,7 @@ import soft.synergy.registraduriaapp.models.StandModel;
 public interface IReportService {
 
     @POST("logs")
-    Call<RegisterResponseModel> createLog(@Body RegisterRequestModel request);
+    Call<ResponseBody> createLog(@Body RegisterRequestModel request);
 
     @GET("sites/station")
     Call<List<PollingStationModel>> getPollingStations();

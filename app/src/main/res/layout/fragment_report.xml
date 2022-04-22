@@ -48,7 +48,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:id="@+id/open_report"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -78,7 +78,7 @@
 
 
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </LinearLayout>
 

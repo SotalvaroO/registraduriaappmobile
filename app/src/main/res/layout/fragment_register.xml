@@ -19,47 +19,60 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="30dp"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingrese el puesto de votación" />
+                android:text="Ingrese el puesto de votación"
+                android:textSize="20sp" />
 
             <Spinner
                 android:id="@+id/station_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingrese el numero de la mesa" />
+                android:text="Ingrese el numero de la mesa"
+                android:textSize="20sp" />
 
             <Spinner
                 android:id="@+id/stand_input"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="40dp" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingrese la cantidad de votos" />
+                android:text="Ingrese la cantidad de votos"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/total_polls"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="45"
+                android:layout_height="40dp"
+                android:hint="Ingrese el número de votos"
                 android:inputType="number" />
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Reportar" />
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:layout_margin="30dp"
+                android:text="Reportar" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

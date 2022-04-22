@@ -30,18 +30,5 @@
 
 <!--    </LinearLayout>-->
 
-    <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/slider"
-        android:layout_width="wrap_content"
-        android:layout_height="210dp"
-        app:iss_auto_cycle="true"
-        app:iss_delay="0"
-        app:iss_error_image="@drawable/bg_gray"
-        app:iss_period="10000"
-        app:iss_placeholder="@drawable/bg_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

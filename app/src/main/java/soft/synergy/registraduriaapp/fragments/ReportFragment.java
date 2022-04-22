@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,20 +28,32 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import soft.synergy.registraduriaapp.R;
+import soft.synergy.registraduriaapp.activities.PDFViewActivity;
+import soft.synergy.registraduriaapp.services.ReportServiceAdapter;
 import soft.synergy.registraduriaapp.utils.LoadingDialog;
 
 
 public class ReportFragment extends Fragment {
 
     private LinearLayout submitButton;
-    private LinearLayout inspectReport;
+    //    private LinearLayout inspectReport;
     private LoadingDialog loadingDialog;
     private String title;
+    private static final int MY_PERMISSIONS_REQUEST = 100;
 
 
     @Override
@@ -49,10 +62,14 @@ public class ReportFragment extends Fragment {
 
         View mView = inflater.inflate(R.layout.fragment_report, container, false);
 
+        if (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST);
+        }
+
 
         submitButton = mView.findViewById(R.id.generate_report);
         loadingDialog = new LoadingDialog(this.getActivity());
-        inspectReport = mView.findViewById(R.id.open_report);
+//        inspectReport = mView.findViewById(R.id.open_report);
         title = "";
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +79,12 @@ public class ReportFragment extends Fragment {
             }
         });
 
-        inspectReport.setOnClickListener(new View.OnClickListener() {
+        /*inspectReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openReport();
             }
-        });
+        });*/
 
         return mView;
     }
@@ -99,37 +116,90 @@ public class ReportFragment extends Fragment {
     }
 
     private void downloadReport() {
-        String url = "http://192.168.1.5:8080/api/logs/report";
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String date = dateFormatter.format(new Date());
-
-        title = "Report_" + date + ".pdf";
-        request.setTitle(title);
-        request.setDescription("Descargando archivo...");
-        String cookie = CookieManager.getInstance().getCookie(url);
-        request.addRequestHeader("cookie", cookie);
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.allowScanningByMediaScanner();
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, title);
-
-        DownloadManager downloadManager = (DownloadManager) getActivity().getSystemService(DOWNLOAD_SERVICE);
-        long downloadId = downloadManager.enqueue(request);
-        loadingDialog.startLoadingAnimation();
-
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        Call<ResponseBody> callDownload = ReportServiceAdapter.getReportService().getReport();
+        callDownload.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void run() {
-                loadingDialog.dismissDialog();
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    boolean writeToDisk = writeResponseBodyToDisk(response.body());
+                    Log.d("FFFFFF", writeToDisk +"F");
+                    loadingDialog.startLoadingAnimation();
 
+
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            loadingDialog.dismissDialog();
+
+
+                        }
+                    }, 4000);
+                    Intent intent = new Intent(getActivity(), PDFViewActivity.class);
+                    intent.putExtra("title", title);
+                    startActivity(intent);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
 
             }
-        }, 4000);
+        });
 
 
+
+
+
+    }
+
+    private boolean writeResponseBodyToDisk(ResponseBody body) {
+        try {
+            DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+            String date = dateFormatter.format(new Date());
+
+            title = "Report_" + date + ".pdf";
+
+            File futureStudioIconFile = new File(getActivity().getExternalFilesDir(null) + File.separator + title);
+            InputStream inputStream = null;
+            OutputStream outputStream = null;
+
+            try {
+                byte[] fileReader = new byte[4096];
+                long fileSize = body.contentLength();
+                long fileSizeDownloaded = 0;
+
+                inputStream = body.byteStream();
+                outputStream = new FileOutputStream(futureStudioIconFile);
+
+                while (true) {
+                    int read = inputStream.read(fileReader);
+
+                    if (read == -1) {
+                        break;
+                    }
+
+                    outputStream.write(fileReader, 0, read);
+                    fileSizeDownloaded += read;
+                    Log.d("TAG", "file download: " + fileSizeDownloaded + " of " + fileSize);
+                }
+                outputStream.flush();
+                return true;
+            } catch (IOException e) {
+                return false;
+            } finally {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+
+                if (outputStream != null) {
+                    outputStream.close();
+                }
+            }
+        } catch (IOException e) {
+            return false;
+        }
     }
 
 }

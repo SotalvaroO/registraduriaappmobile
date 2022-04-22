@@ -16,6 +16,11 @@
         android:theme="@style/Theme.Registraduriaappmobile"
         android:usesCleartextTraffic="true">
         <activity
+            android:screenOrientation="portrait"
+            android:name=".activities.PDFViewActivity"
+            android:exported="false" />
+        <activity
+            android:screenOrientation="portrait"
             android:name=".activities.MenuSlideActivity"
             android:exported="true"
             android:label="@string/title_activity_menu_slide"
@@ -27,14 +32,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false"></activity>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -45,7 +45,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_path" />
         </provider>
-
     </application>
 
 </manifest>
